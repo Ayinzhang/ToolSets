@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{BEA3BD57-E10D-4D5C-A4C5-C0CB24B271D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{B0CB1508-E713-47CF-B0CC-D35F8169DBBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{FE37313E-458D-48A0-88C3-E9E4A0C1B10B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\ImGui">
+      <UniqueIdentifier>{7DBE6939-262F-4D05-B7B5-763ED41C38A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\GLFW">
+      <UniqueIdentifier>{E03FC2DA-3DD3-4CB2-BFE9-90522481CD57}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="Application.cpp"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\imgui.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\imgui_draw.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\imgui_tables.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\imgui_widgets.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\imgui_demo.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\backends\imgui_impl_glfw.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\imgui\backends\imgui_impl_opengl3.cpp"><Filter>ThirdParty\ImGui</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\context.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\init.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\input.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\monitor.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\platform.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\vulkan.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\window.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\egl_context.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\osmesa_context.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\null_init.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\null_monitor.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\null_window.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\null_joystick.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_module.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_time.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_thread.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_init.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_joystick.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_monitor.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\win32_window.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+    <ClCompile Include="..\ThirdParty\glfw\src\wgl_context.c"><Filter>ThirdParty\GLFW</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="..\ThirdParty\imgui\imgui.h"><Filter>ThirdParty\ImGui</Filter></ClInclude>
+    <ClInclude Include="..\ThirdParty\imgui\imconfig.h"><Filter>ThirdParty\ImGui</Filter></ClInclude>
+    <ClInclude Include="..\ThirdParty\imgui\backends\imgui_impl_glfw.h"><Filter>ThirdParty\ImGui</Filter></ClInclude>
+    <ClInclude Include="..\ThirdParty\imgui\backends\imgui_impl_opengl3.h"><Filter>ThirdParty\ImGui</Filter></ClInclude>
+    <ClInclude Include="..\ThirdParty\glfw\include\GLFW\glfw3.h"><Filter>ThirdParty\GLFW</Filter></ClInclude>
+    <ClInclude Include="..\ThirdParty\glfw\include\GLFW\glfw3native.h"><Filter>ThirdParty\GLFW</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ThirdParty\imgui\LICENSE.txt"><Filter>ThirdParty\ImGui</Filter></None>
+    <None Include="..\ThirdParty\glfw\LICENSE.md"><Filter>ThirdParty\GLFW</Filter></None>
+  </ItemGroup>
+</Project>
