@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.h"
 
 struct GLFWwindow;
 
@@ -14,10 +15,9 @@ public:
     int Run();
 
 private:
+    Core core; GLFWwindow* window = nullptr;
+    bool isGLFWInitialized = false, isImGuiInitialized = false, isPlatformInitialized = false, isRendererInitialized = false;
+
     bool Init();
     void DrawUI();
-
-    GLFWwindow* window = nullptr;
-    bool isGLFWInitialized = false, isImGuiInitialized = false, isPlatformInitialized = false, isRendererInitialized = false;
-    int clickType = 0, gapMs = 100, hotKey = 0, shutDownMins = 0; bool isSettingHotKey = false;
 };

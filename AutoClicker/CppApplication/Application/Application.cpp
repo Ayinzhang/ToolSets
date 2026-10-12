@@ -3,7 +3,6 @@
 #include "imgui_impl_opengl3.h"
 
 #include <GLFW/glfw3.h>
-#include <algorithm>
 #include <cstdio>
 
 int Application::Run()
@@ -14,9 +13,11 @@ int Application::Run()
     {
         glfwPollEvents();
 
+        core.Update();
+
         int width = 0, height = 0;
         glfwGetFramebufferSize(window, &width, &height);
-        if (width == 0 || height == 0) { glfwWaitEventsTimeout(0.1); continue; }
+        if (width == 0 || height == 0) { glfwWaitEventsTimeout(0.01); continue; }
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -75,11 +76,6 @@ bool Application::Init()
 
 void Application::DrawUI()
 {
-    if (isSettingHotKey)
-        if (ImGui::IsKeyPressed(ImGuiKey_Escape, false)) isSettingHotKey = false;
-        else for (int key = ImGuiKey_NamedKey_BEGIN; isSettingHotKey && key < ImGuiKey_GamepadStart; ++key)
-            if (ImGui::IsKeyPressed(static_cast<ImGuiKey>(key), false)) { hotKey = key; isSettingHotKey = false; break; }
-
     const ImGuiViewport* viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(viewport->WorkPos);
     ImGui::SetNextWindowSize(viewport->WorkSize);
@@ -105,7 +101,7 @@ void Application::DrawUI()
 
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(90);
-        ImGui::Combo("##click", &clickType, "Left\0Middle\0Right\0");
+        ImGui::Combo("##click", &core.clickType, "Left\0Middle\0Right\0");
         ImGui::SetItemTooltip("Simu the L/M/R mouse click.");
 
         ImGui::TableSetColumnIndex(2);
@@ -113,8 +109,7 @@ void Application::DrawUI()
 
         ImGui::TableSetColumnIndex(3);
         ImGui::SetNextItemWidth(90);
-        ImGui::InputInt("##gap", &gapMs, 0, 0);
-        gapMs = std::max(1, gapMs);
+        ImGui::InputInt("##gap", &core.gapMs, 0, 0);
 
         // Row 2
         ImGui::TableNextRow();
@@ -123,17 +118,15 @@ void Application::DrawUI()
         ImGui::TextUnformatted("Hotkey");
 
         ImGui::TableSetColumnIndex(1);
-        const char* hotKeyName = hotKey == 0 ? "None" : ImGui::GetKeyName(static_cast<ImGuiKey>(hotKey));
-        if (ImGui::Button(isSettingHotKey ? "Press a key" : hotKeyName, ImVec2(90, 0))) isSettingHotKey = !isSettingHotKey;
-        ImGui::SetItemTooltip("Click to bind a key. Esc cancels.");
+        if (ImGui::Button(core.isSettingHotKey ? "Press a key" : core.hotKeyName, ImVec2(90, 0))) core.ToggleHotKeyBinding();
+        ImGui::SetItemTooltip("Click to bind a key. Esc cancels. Works in the background.\nEnter and KeypadEnter share the same hotkey.");
 
         ImGui::TableSetColumnIndex(2);
         ImGui::TextUnformatted("Shutdown(mins)");
 
         ImGui::TableSetColumnIndex(3);
         ImGui::SetNextItemWidth(90);
-        ImGui::InputInt("##shutdown", &shutDownMins, 0, 0);
-        shutDownMins = std::max(0, shutDownMins);
+        ImGui::InputInt("##shutdown", &core.shutDownMins, 0, 0);
 
         ImGui::EndTable();
     }
