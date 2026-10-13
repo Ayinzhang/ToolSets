@@ -17,7 +17,7 @@ int Application::Run()
 
         int width = 0, height = 0;
         glfwGetFramebufferSize(window, &width, &height);
-        if (width == 0 || height == 0) { glfwWaitEventsTimeout(0.01); continue; }
+        if (width == 0 || height == 0) { glfwWaitEventsTimeout(0.1); continue; }
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -122,11 +122,11 @@ void Application::DrawUI()
         ImGui::SetItemTooltip("Click to bind a key. Esc cancels. Works in the background.\nEnter and KeypadEnter share the same hotkey.");
 
         ImGui::TableSetColumnIndex(2);
-        ImGui::TextUnformatted("Shutdown(mins)");
+        ImGui::TextUnformatted("PowerOff(mins)");
 
         ImGui::TableSetColumnIndex(3);
         ImGui::SetNextItemWidth(90);
-        ImGui::InputInt("##shutdown", &core.shutDownMins, 0, 0);
+        ImGui::InputInt("##poweroff", &core.powerOffMins, 0, 0);
 
         ImGui::EndTable();
     }

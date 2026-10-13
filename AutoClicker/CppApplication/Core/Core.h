@@ -13,7 +13,7 @@ public:
     void Update();
     void ToggleHotKeyBinding();
 
-    int clickType = 0, gapMs = 100, shutDownMins = 0, hotKey = 0;
+    int clickType = 0, gapMs = 100, powerOffMins = 0, hotKey = 0;
     bool isSettingHotKey = false; char hotKeyName[64] = "None";
 
 private:

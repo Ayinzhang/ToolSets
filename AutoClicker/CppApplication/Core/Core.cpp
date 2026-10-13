@@ -1,5 +1,6 @@
 #include "Core.h"
-
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <cstdio>
 
@@ -66,7 +67,7 @@ void Core::Update()
     // Handle clicking and shutdown
     auto now = std::chrono::steady_clock::now();
 
-    if (shutDownMins > 0 && now >= started + std::chrono::minutes(shutDownMins)) { isRunning = false; ShutDown(); return; }
+    if (powerOffMins > 0 && now >= started + std::chrono::minutes(powerOffMins)) { isRunning = false; ShutDown(); return; }
 
     if (now >= nextClick) 
     { 
