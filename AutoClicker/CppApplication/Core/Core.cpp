@@ -80,9 +80,6 @@ void Core::ToggleHotKeyBinding()
 {
     isSettingHotKey = !isSettingHotKey;
     if (isSettingHotKey) isRunning = false;
-
-    for (int key = 0; key < 256; ++key)
-        keyDown[key] = IsKeyboardKey(key) && (GetAsyncKeyState(key) & 0x8000) != 0;
 }
 
 void Core::ToggleClicking()
