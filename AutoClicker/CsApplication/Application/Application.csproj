@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="Application.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 

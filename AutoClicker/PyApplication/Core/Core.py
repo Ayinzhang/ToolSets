@@ -32,14 +32,11 @@ kernel32.GetCurrentProcess.argtypes = []
 kernel32.GetCurrentProcess.restype = wintypes.HANDLE
 kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
 kernel32.CloseHandle.restype = wintypes.BOOL
-advapi32.OpenProcessToken.argtypes = [wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE),]
+advapi32.OpenProcessToken.argtypes = [wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE)]
 advapi32.OpenProcessToken.restype = wintypes.BOOL
-advapi32.LookupPrivilegeValueW.argtypes = [wintypes.LPCWSTR, wintypes.LPCWSTR, ctypes.POINTER(Luid),]
+advapi32.LookupPrivilegeValueW.argtypes = [wintypes.LPCWSTR, wintypes.LPCWSTR, ctypes.POINTER(Luid)]
 advapi32.LookupPrivilegeValueW.restype = wintypes.BOOL
-advapi32.AdjustTokenPrivileges.argtypes = [
-    wintypes.HANDLE, wintypes.BOOL, ctypes.POINTER(TokenPrivileges),
-    wintypes.DWORD, ctypes.POINTER(TokenPrivileges), ctypes.POINTER(wintypes.DWORD),
-]
+advapi32.AdjustTokenPrivileges.argtypes = [wintypes.HANDLE, wintypes.BOOL, ctypes.POINTER(TokenPrivileges), wintypes.DWORD, ctypes.POINTER(TokenPrivileges), ctypes.POINTER(wintypes.DWORD)]
 advapi32.AdjustTokenPrivileges.restype = wintypes.BOOL
 
 
