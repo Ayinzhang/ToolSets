@@ -10,7 +10,7 @@
     <OutputPath>.</OutputPath>
     <Name>Application</Name>
     <RootNamespace>Application</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
+    <Environment>PYDEVD_USE_SYS_MONITORING=0</Environment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +23,6 @@
   <ItemGroup>
     <Compile Include="Application.py" />
     <Compile Include="Main.py" />
-    <InterpreterReference Include="Global|PythonCore|3.12" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

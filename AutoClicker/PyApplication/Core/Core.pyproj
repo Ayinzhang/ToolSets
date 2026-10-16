@@ -9,7 +9,8 @@
     <OutputPath>.</OutputPath>
     <Name>Core</Name>
     <RootNamespace>Core</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
+    <!-- VS 2022's bundled debugpy uses obsolete thread internals on Python 3.14. -->
+    <Environment>PYDEVD_USE_SYS_MONITORING=0</Environment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Core.py" />
-    <InterpreterReference Include="Global|PythonCore|3.12" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

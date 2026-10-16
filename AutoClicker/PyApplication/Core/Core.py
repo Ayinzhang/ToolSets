@@ -3,31 +3,16 @@ from ctypes import wintypes
 from time import monotonic
 
 class MouseInput(ctypes.Structure):
-    _fields_ = [
-        ("dx", wintypes.LONG),
-        ("dy", wintypes.LONG),
-        ("data", wintypes.DWORD),
-        ("flags", wintypes.DWORD),
-        ("time", wintypes.DWORD),
-        ("extraInfo", ctypes.c_size_t),
-    ]
-
+    _fields_ = [("dx", wintypes.LONG), ("dy", wintypes.LONG), ("data", wintypes.DWORD), ("flags", wintypes.DWORD), ("time", wintypes.DWORD), ("extraInfo", ctypes.c_size_t)]
 
 class Input(ctypes.Structure):
     _fields_ = [("type", wintypes.DWORD), ("mouse", MouseInput)]
 
-
 class Luid(ctypes.Structure):
     _fields_ = [("low", wintypes.DWORD), ("high", wintypes.LONG)]
 
-
 class TokenPrivileges(ctypes.Structure):
-    _fields_ = [
-        ("count", wintypes.DWORD),
-        ("luid", Luid),
-        ("attributes", wintypes.DWORD),
-    ]
-
+    _fields_ = [("count", wintypes.DWORD), ("luid", Luid), ("attributes", wintypes.DWORD)]
 
 user32 = ctypes.WinDLL("user32")
 kernel32 = ctypes.WinDLL("kernel32")
@@ -47,13 +32,9 @@ kernel32.GetCurrentProcess.argtypes = []
 kernel32.GetCurrentProcess.restype = wintypes.HANDLE
 kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
 kernel32.CloseHandle.restype = wintypes.BOOL
-advapi32.OpenProcessToken.argtypes = [
-    wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE),
-]
+advapi32.OpenProcessToken.argtypes = [wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE),]
 advapi32.OpenProcessToken.restype = wintypes.BOOL
-advapi32.LookupPrivilegeValueW.argtypes = [
-    wintypes.LPCWSTR, wintypes.LPCWSTR, ctypes.POINTER(Luid),
-]
+advapi32.LookupPrivilegeValueW.argtypes = [wintypes.LPCWSTR, wintypes.LPCWSTR, ctypes.POINTER(Luid),]
 advapi32.LookupPrivilegeValueW.restype = wintypes.BOOL
 advapi32.AdjustTokenPrivileges.argtypes = [
     wintypes.HANDLE, wintypes.BOOL, ctypes.POINTER(TokenPrivileges),
@@ -80,10 +61,7 @@ class Core:
     def Update(self):
         isDown = [False] * 256
         for key in range(8, 256):
-            isDown[key] = (
-                self.IsKeyboardKey(key)
-                and (user32.GetAsyncKeyState(key) & 0x8000) != 0
-            )
+            isDown[key] = self.IsKeyboardKey(key) and (user32.GetAsyncKeyState(key) & 0x8000) != 0
 
         if self.isSettingHotKey:
             if isDown[27]:
@@ -154,30 +132,18 @@ class Core:
 
     @staticmethod
     def Click(clickType):
-        inputs = (Input * 2)(
-            Input(mouse=MouseInput(flags=Core.downFlags[clickType])),
-            Input(mouse=MouseInput(flags=Core.upFlags[clickType])),
-        )
+        inputs = (Input * 2)(Input(mouse=MouseInput(flags=Core.downFlags[clickType])), Input(mouse=MouseInput(flags=Core.upFlags[clickType])))
         user32.SendInput(2, inputs, ctypes.sizeof(Input))
 
     @staticmethod
     def ShutDown():
         token = wintypes.HANDLE()
-        advapi32.OpenProcessToken(
-            kernel32.GetCurrentProcess(), 0x0020 | 0x0008, ctypes.byref(token)
-        )
+        advapi32.OpenProcessToken(kernel32.GetCurrentProcess(), 0x0020 | 0x0008, ctypes.byref(token))
         privileges = TokenPrivileges(count=1, attributes=2)
-        advapi32.LookupPrivilegeValueW(
-            None, "SeShutdownPrivilege", ctypes.byref(privileges.luid)
-        )
+        advapi32.LookupPrivilegeValueW(None, "SeShutdownPrivilege", ctypes.byref(privileges.luid))
         previous = TokenPrivileges()
         previousSize = wintypes.DWORD()
-        advapi32.AdjustTokenPrivileges(
-            token, False, ctypes.byref(privileges), ctypes.sizeof(previous),
-            ctypes.byref(previous), ctypes.byref(previousSize),
-        )
+        advapi32.AdjustTokenPrivileges(token, False, ctypes.byref(privileges), ctypes.sizeof(previous), ctypes.byref(previous), ctypes.byref(previousSize))
         user32.ExitWindowsEx(0x00000008, 0x00040000 | 0x80000000)
-        advapi32.AdjustTokenPrivileges(
-            token, False, ctypes.byref(previous), 0, None, None
-        )
+        advapi32.AdjustTokenPrivileges(token, False, ctypes.byref(previous), 0, None, None)
         kernel32.CloseHandle(token)
